@@ -19,6 +19,7 @@ import java.util.UUID;
 public class UserEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
 	UUID id;
 
 	@OneToMany(mappedBy = "user")
