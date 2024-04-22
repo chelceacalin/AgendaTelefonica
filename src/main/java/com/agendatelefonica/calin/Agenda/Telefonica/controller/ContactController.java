@@ -11,4 +11,7 @@ public class ContactController {
 	public String index() {
 		return "index";
 	}
+
+
+
 }
