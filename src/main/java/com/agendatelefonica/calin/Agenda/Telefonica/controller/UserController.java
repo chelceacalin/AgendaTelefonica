@@ -1,14 +1,18 @@
 package com.agendatelefonica.calin.Agenda.Telefonica.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.Map;
 
 @Controller
@@ -16,16 +20,9 @@ public class UserController {
 
 
 	@GetMapping("/")
-	public String login() {
-		return "login";
-	}
-
-	@GetMapping("/auth/{name}")
-	public String authPage(@PathVariable String name, Model model) {
-		// Aici poți folosi datele din model pentru a afișa informațiile utilizatorului pe pagina de autentificare
+	public String index() {
 		return "index";
 	}
-
 
 	private static String getUserCredentials(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -60,14 +57,21 @@ public class UserController {
 		model.addAttribute("googleLogin", true);
 	}
 
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
 
-
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("A intrat");
+		new SecurityContextLogoutHandler().logout(request, null, null);
+		return "redirect:/";
+	}
 
 	@GetMapping("*")
 	public String notFound() {
 		return "notFound";
 	}
 
-	private record UserInfo(String username, String password) {
-	}
 }

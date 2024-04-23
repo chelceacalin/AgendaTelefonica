@@ -6,8 +6,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -17,7 +15,6 @@ public class SecurityConfig {
 		return http
 				.authorizeHttpRequests(auth ->
 						{
-							auth.requestMatchers("/").permitAll();
 							auth.anyRequest().authenticated();
 						}
 				)
@@ -25,7 +22,9 @@ public class SecurityConfig {
 						formLogin
 								.loginPage("/login")
 								.permitAll())
-				.logout(withDefaults())
+				.logout(logout -> {
+					logout.logoutSuccessUrl("/logout");
+				})
 				.build();
 	}
 }
