@@ -26,6 +26,8 @@ public class UserEntity {
 
 	String name;
 
+	String avatar_url;
+
 	@OneToMany(mappedBy = "user")
 	List<Contact> contacts;
 }

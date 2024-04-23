@@ -1,5 +1,7 @@
 package com.agendaCorespondenta.calin.Agenda.Corespondenta.controller;
 
+import com.agendaCorespondenta.calin.Agenda.Corespondenta.model.UserEntity;
+import com.agendaCorespondenta.calin.Agenda.Corespondenta.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -16,16 +18,23 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
+	final UserService userService;
 
 	@GetMapping("/")
 	public String index(Model model) {
 		getUserCredentials(model);
-		if (!model.containsAttribute("email")) {
-			model.addAttribute("error", "Make sure that your github account has an public email!");
+		System.out.println(model);
+		if (!model.containsAttribute("email") || model.getAttribute("email") == null) {
+			model.addAttribute("error", "Make sure that your github account has a public email!");
 			return login();
 		}
+
+		UserEntity user = userService.createUserIfNotExists(model);
+		model.addAttribute("user", user);
+
 		return "index";
 	}
+
 
 	private static void getUserCredentials(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -43,10 +52,9 @@ public class AuthenticationController {
 
 
 	private static void computeGithubLogin(Model model, Map<String, Object> attributes) {
-		System.out.println(attributes);
 		model.addAttribute("name", attributes.get("name"));
-		model.addAttribute("bio", attributes.get("bio"));
 		model.addAttribute("avatar_url", attributes.get("avatar_url"));
+		model.addAttribute("email", attributes.getOrDefault("email", ""));
 		model.addAttribute("githubLogin", true);
 	}
 
