@@ -23,6 +23,8 @@ public class Contact {
 
 	String name;
 
+	String nickName;
+
 	String email;
 
 	@ManyToOne

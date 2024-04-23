@@ -24,6 +24,8 @@ public class UserEntity {
 
 	String email;
 
+	String name;
+
 	@OneToMany(mappedBy = "user")
 	List<Contact> contacts;
 }

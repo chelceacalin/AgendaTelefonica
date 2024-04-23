@@ -19,33 +19,10 @@
 <div class="container mx-auto py-8">
     <h1 class="text-3xl font-bold mb-6">Agenda Corespondenta</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Contact Card -->
-        <div class="bg-white shadow-md rounded-lg p-4">
-            <h2 class="text-lg font-semibold mb-2">John Doe</h2>
-            <p class="text-gray-600">123-456-7890</p>
-            <p class="text-gray-600">john.doe@example.com</p>
-            <div class="mt-4">
-                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                    Edit
-                </button>
-                <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-                    Delete
-                </button>
-            </div>
-        </div>
-        <!-- End Contact Card -->
 
-        <!-- Add New Contact Card -->
-        <div class="bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg p-8 flex flex-col justify-center items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-600 mb-4" viewBox="0 0 20 20"
-                 fill="currentColor">
-                <path fill-rule="evenodd"
-                      d="M10 2a8 8 0 0 1 8 8c0 2.1-.8 4-2.1 5.5L18 18l-1.5-1.5A7.96 7.96 0 0 1 10 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8zm1 11a6 6 0 1 0-2-11.77V3a1 1 0 0 0-2 0v1.23A6 6 0 0 0 4 13a6.02 6.02 0 0 0 5 5.92V19h2v-1.08A6.02 6.02 0 0 0 11 13z"
-                      clip-rule="evenodd"/>
-            </svg>
-            <p class="text-gray-600">Add New Contact</p>
-        </div>
-        <!-- End Add New Contact Card -->
+        {{>fragments/contactCard}}
+        {{>fragments/addNewContact}}
+
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
