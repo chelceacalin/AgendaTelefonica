@@ -1,4 +1,4 @@
-package com.agendatelefonica.calin.Agenda.Telefonica.config;
+package com.agendaCorespondenta.calin.Agenda.Corespondenta.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

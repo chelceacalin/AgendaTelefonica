@@ -1,4 +1,4 @@
-package com.agendatelefonica.calin.Agenda.Telefonica.controller;
+package com.agendaCorespondenta.calin.Agenda.Corespondenta.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;

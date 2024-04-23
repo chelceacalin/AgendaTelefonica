@@ -1,4 +1,4 @@
-package com.agendatelefonica.calin.Agenda.Telefonica.controller;
+package com.agendaCorespondenta.calin.Agenda.Corespondenta.controller;
 
 import org.springframework.stereotype.Controller;
 

@@ -1,4 +1,4 @@
-package com.agendatelefonica.calin.Agenda.Telefonica.model;
+package com.agendaCorespondenta.calin.Agenda.Corespondenta.model;
 
 
 import jakarta.persistence.*;
@@ -21,6 +21,8 @@ public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	UUID id;
+
+	String email;
 
 	@OneToMany(mappedBy = "user")
 	List<Contact> contacts;

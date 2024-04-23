@@ -1,13 +1,13 @@
-package com.agendatelefonica.calin.Agenda.Telefonica;
+package com.agendaCorespondenta.calin.Agenda.Corespondenta;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AgendaTelefonicaApplication {
+public class AgendaCorespondenta {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AgendaTelefonicaApplication.class, args);
+		SpringApplication.run(AgendaCorespondenta.class, args);
 	}
 
 }

@@ -1,6 +1,6 @@
-package com.agendatelefonica.calin.Agenda.Telefonica.repository;
+package com.agendaCorespondenta.calin.Agenda.Corespondenta.repository;
 
-import com.agendatelefonica.calin.Agenda.Telefonica.model.Contact;
+import com.agendaCorespondenta.calin.Agenda.Corespondenta.model.Contact;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

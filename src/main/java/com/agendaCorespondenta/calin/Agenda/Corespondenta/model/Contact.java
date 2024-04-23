@@ -1,4 +1,4 @@
-package com.agendatelefonica.calin.Agenda.Telefonica.model;
+package com.agendaCorespondenta.calin.Agenda.Corespondenta.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -30,7 +29,4 @@ public class Contact {
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	@JsonIgnore
 	UserEntity user;
-
-	@OneToMany(mappedBy = "contact")
-	List<PhoneNumber> phoneNumberList;
 }
