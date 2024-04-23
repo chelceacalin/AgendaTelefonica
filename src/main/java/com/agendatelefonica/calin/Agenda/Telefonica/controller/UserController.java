@@ -1,7 +1,6 @@
 package com.agendatelefonica.calin.Agenda.Telefonica.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -9,10 +8,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
 import java.util.Map;
 
 @Controller
@@ -39,8 +35,6 @@ public class UserController {
 				computeGoogleLogin(model, attributes);
 			} else if (attributes.containsKey("gists_url")) {
 				computeGithubLogin(model, attributes);
-			} else {
-				// Form Login
 			}
 		}
 	}
@@ -67,7 +61,7 @@ public class UserController {
 	}
 
 	@GetMapping("/logout")
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
+	public String logout(HttpServletRequest request) {
 		System.out.println("A intrat");
 		new SecurityContextLogoutHandler().logout(request, null, null);
 		return "redirect:/";
