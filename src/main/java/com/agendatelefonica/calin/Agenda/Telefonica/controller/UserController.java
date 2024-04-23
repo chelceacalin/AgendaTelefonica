@@ -20,11 +20,16 @@ public class UserController {
 
 
 	@GetMapping("/")
-	public String index() {
+	public String index(Model model) {
+		getUserCredentials(model);
+		if (!model.containsAttribute("email")) {
+			model.addAttribute("error", "Make sure that your github account has an public email!");
+			return login();
+		}
 		return "index";
 	}
 
-	private static String getUserCredentials(Model model) {
+	private static void getUserCredentials(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		if (authentication != null && authentication.getPrincipal() instanceof OAuth2User principal) {
@@ -38,7 +43,6 @@ public class UserController {
 				// Form Login
 			}
 		}
-		return (String) model.getAttribute("name");
 	}
 
 
