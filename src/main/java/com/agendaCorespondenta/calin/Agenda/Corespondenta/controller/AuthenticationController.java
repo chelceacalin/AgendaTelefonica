@@ -24,10 +24,9 @@ public class AuthenticationController {
 			model.addAttribute("error", error);
 			return login(model);
 		}
-		UserEntity user = userService.createUserIfNotExists(model);
-		model.addAttribute("user", user);
-		//https://stackoverflow.com/questions/33876699/how-to-make-a-model-attribute-global
 
+		UserEntity user = userService.getCurrentUser();
+		model.addAttribute("user", user);
 		return "index";
 	}
 

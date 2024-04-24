@@ -24,11 +24,17 @@ public class SecurityConfig {
 						formLogin
 								.loginPage("/login")
 								.defaultSuccessUrl("/")
+								.successHandler(customAuthenticationSuccessHandler())
 								.permitAll())
 				.logout(logout ->
 						logout.logoutSuccessUrl("/logout")
 				)
 				.build();
+	}
+
+	@Bean
+	public CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+		return new CustomAuthenticationSuccessHandler();
 	}
 
 

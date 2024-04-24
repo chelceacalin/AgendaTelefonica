@@ -19,6 +19,7 @@
 <div class="w-full max-w-sm">
     <div class="title">Add Contact</div>
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post" action="/contact/add">
+        <input type="hidden" id="userEmail" name="userEmail" value="{{user.email}}" />
         {{#hasFormError}}
             <div class="text-red-500 font-bold m-auto mb-4">{{addFormError}}</div>
         {{/hasFormError}}

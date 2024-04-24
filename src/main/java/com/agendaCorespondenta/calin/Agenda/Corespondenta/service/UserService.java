@@ -38,19 +38,13 @@ public class UserService {
 		return userRepository.existsByEmail(email);
 	}
 
-	public UserEntity createUserIfNotExists(Model model) {
-		String email = (String) model.getAttribute("email");
-		Optional<UserEntity> userEntity = userRepository.findByEmail(email);
-		if (userEntity.isEmpty()) {
-			UserEntity user = new UserEntity()
-					.setId(UUID.randomUUID())
-					.setName((String) model.getAttribute("name"))
-					.setEmail(email)
-					.setAvatar_url((String) model.getAttribute("avatar_url"));
-			userRepository.save(user);
-			return user;
+	public UserEntity createUserIfNotExists(UserEntity userEntity) {
+		Optional<UserEntity> userEntityOptional = userRepository.findByEmail(userEntity.getEmail());
+		if (userEntityOptional.isEmpty()) {
+			userRepository.save(userEntity);
+			return userEntity;
 		}
-		return userEntity.get();
+		return userEntity;
 	}
 
 
@@ -81,6 +75,26 @@ public class UserService {
 		model.addAttribute("avatar_url", attributes.get("picture"));
 		model.addAttribute("email", attributes.get("email"));
 		model.addAttribute("googleLogin", true);
+	}
+
+	public UserEntity getCurrentUser() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		if (authentication != null && authentication.getPrincipal() instanceof OAuth2User oauth2User) {
+			String name = oauth2User.getAttribute("name");
+			String email = oauth2User.getAttribute("email");
+			String avatarUrl = oauth2User.getAttribute("picture");
+
+			UserEntity user = new UserEntity()
+					.setId(UUID.randomUUID())
+					.setName(name)
+					.setEmail(email)
+					.setAvatar_url(avatarUrl);
+
+			createUserIfNotExists(user);
+			return user;
+		}
+		return null;
 	}
 
 }

@@ -20,24 +20,34 @@ public class ContactController {
 	final ContactService contactService;
 
 	@GetMapping("/add")
-	public String addContact(Model model) {
+	public String addContact(Model model, @ModelAttribute("user") UserEntity user) {
+		UserEntity realUser = userService.findByEmail(user.getEmail());
+		model.addAttribute("user", realUser);
 		return "fragments/addNewContactForm";
 	}
 
 	@PostMapping("/add")
-	public String addContact(@ModelAttribute Contact contact, Model model) {
-		UserEntity user = userService.createUserIfNotExists(model);
-		if(contactService.existsByEmail(contact.getEmail())){
-			model.addAttribute("hasFormError",true);
-			model.addAttribute("addFormError","Contact with that email already exists!");
-			return "fragments/addNewContactForm";
+	public String addContact(@ModelAttribute Contact contact, String userEmail, Model model) {
+
+		System.out.println(contact);
+		System.out.println(userEmail);
+		UserEntity currentUser = userService.findByEmail(userEmail);
+
+		if (contactService.existsByEmail(contact.getEmail())) {
+			model.addAttribute("hasFormError", true);
+			model.addAttribute("addFormError", "Contact with that email already exists!");
+			return "redirect:/invalidAddForm";
 		}
 
-		contactService.saveContact(contact, user);
-		model.addAttribute("user", user);
+		contactService.saveContact(contact, currentUser);
+		model.addAttribute("user", currentUser);
 		model.addAttribute("isNewContact", true);
 		model.addAttribute("contact", contact);
 		return "redirect:/";
 	}
 
+	@GetMapping("/invalidAddForm")
+	public String invalidAddForm(Model model) {
+		return "fragments/addNewContactForm";
+	}
 }

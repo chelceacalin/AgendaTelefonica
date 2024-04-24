@@ -1,4 +1,8 @@
-<a href="/contact/add">
+<form id="contactForm" action="/contact/add" method="get" style="display: none;">
+    <input type="hidden" id="email" name="email" value="{{user.email}}" />
+</form>
+
+<a href="#" onclick="submitForm()"> <!-- Apel către funcția JavaScript la click -->
     <div class="bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg p-12 flex flex-col justify-center items-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-600 mb-4" viewBox="0 0 20 20"
              fill="currentColor">
@@ -9,3 +13,10 @@
         <p class="text-gray-600">Add New Contact</p>
     </div>
 </a>
+
+<script>
+    function submitForm() {
+        // Simulează trimiterea formularului
+        document.getElementById("contactForm").submit();
+    }
+</script>
