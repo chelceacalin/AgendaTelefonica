@@ -2,6 +2,7 @@ package com.agendaCorespondenta.calin.Agenda.Corespondenta.service;
 
 import com.agendaCorespondenta.calin.Agenda.Corespondenta.model.UserEntity;
 import com.agendaCorespondenta.calin.Agenda.Corespondenta.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserService {
 
 	final UserRepository userRepository;
