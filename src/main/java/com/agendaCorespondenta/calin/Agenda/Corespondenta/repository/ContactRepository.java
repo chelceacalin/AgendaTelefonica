@@ -13,6 +13,8 @@ public interface ContactRepository extends JpaRepository<Contact, UUID> {
 
 	Boolean existsByEmail(String email);
 
-	@Query("select c from Contact c where c.user.id=?1")
+	@Query("select c from Contact c where c.user.id=?1 order by c.email")
 	List<Contact> findAllByUserId(UUID userId);
+
+	Contact findByEmail(String email);
 }

@@ -3,11 +3,17 @@
     <p class="text-gray-600">Nickname: {{nickName}}</p>
     <p class="text-gray-600">Email: {{email}}</p>
     <div class="mt-4">
-        <a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 me-4 rounded">
-            Edit
-        </a>
-        <a class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-            Delete
-        </a>
+        <form method="get" action="/contact/edit/{{email}}" class="inline">
+            <input type="hidden" name="email" value="{{email}}" />
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 me-4 rounded">
+                Edit
+            </button>
+        </form>
+        <form method="post" action="/delete/{{email}}" class="inline">
+            <input type="hidden" name="email" value="{{email}}" />
+            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                Delete
+            </button>
+        </form>
     </div>
 </div>

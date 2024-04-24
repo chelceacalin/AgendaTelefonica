@@ -26,11 +26,25 @@ public class ContactService {
 		}
 	}
 
+	public Contact findByEmail(String email) {
+		return contactRepository.findByEmail(email);
+	}
+
 	public Boolean existsByEmail(String email) {
 		return contactRepository.existsByEmail(email);
 	}
 
 	public List<Contact> findAllyUserId(UUID userId) {
 		return contactRepository.findAllByUserId(userId);
+	}
+
+	public void updateContact(Contact updatedContact){
+		Contact contact = findByEmail(updatedContact.getEmail());
+		if(contact != null){
+			contact.setName(updatedContact.getName());
+			contact.setNickName(updatedContact.getNickName());
+			contactRepository.save(contact);
+		}
+
 	}
 }

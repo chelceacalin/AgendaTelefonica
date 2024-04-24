@@ -7,7 +7,11 @@
     <title>Agenda Corespondenta</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-
+    <style>
+        .bg-gray-200:hover {
+            background-color: #CBD5E0; /* Change background color on hover */
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100 text-gray-900 font-sans antialiased">
@@ -29,8 +33,12 @@
 
 <div class="container mx-auto py-8">
     <h1 class="text-3xl font-bold mb-6">Agenda Corespondenta</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
+    {{#successMessage}}
+        {{>fragments/successMessage}}
+    {{/successMessage}}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {{#contacts}}
             {{>fragments/contactCard}}
         {{/contacts}}
@@ -39,6 +47,16 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script>
+
+    let successMessageUpdate = document.querySelector(".success");
+
+    if (successMessageUpdate) {
+        setTimeout(() => {
+            successMessageUpdate.remove();
+        }, 2000);
+    }
+</script>
 </body>
 
 </html>

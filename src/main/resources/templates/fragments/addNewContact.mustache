@@ -2,8 +2,9 @@
     <input type="hidden" id="email" name="email" value="{{user.email}}" />
 </form>
 
-<a href="#" onclick="submitForm()"> <!-- Apel către funcția JavaScript la click -->
-    <div class="bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg p-12 flex flex-col justify-center items-center">
+
+<a href="#" onclick="submitForm()">
+    <div class="bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg p-12 flex flex-col justify-center items-center transition duration-300 ease-in-out hover:bg-gray-300">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-600 mb-4" viewBox="0 0 20 20"
              fill="currentColor">
             <path fill-rule="evenodd"
@@ -16,7 +17,6 @@
 
 <script>
     function submitForm() {
-        // Simulează trimiterea formularului
         document.getElementById("contactForm").submit();
     }
 </script>

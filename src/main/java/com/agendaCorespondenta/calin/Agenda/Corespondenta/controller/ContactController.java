@@ -7,10 +7,8 @@ import com.agendaCorespondenta.calin.Agenda.Corespondenta.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/contact")
@@ -27,7 +25,7 @@ public class ContactController {
 	}
 
 	@PostMapping("/add")
-	public String addContact(@ModelAttribute Contact contact, String userEmail, Model model) {
+	public String addContact(@ModelAttribute Contact contact, String userEmail, Model model, RedirectAttributes redirectAttributes) {
 
 		System.out.println(contact);
 		System.out.println(userEmail);
@@ -43,11 +41,26 @@ public class ContactController {
 		model.addAttribute("user", currentUser);
 		model.addAttribute("isNewContact", true);
 		model.addAttribute("contact", contact);
+		redirectAttributes.addFlashAttribute("successMessage", "Contact added successfully!");
 		return "redirect:/";
 	}
 
 	@GetMapping("/invalidAddForm")
 	public String invalidAddForm(Model model) {
 		return "fragments/addNewContactForm";
+	}
+
+	@GetMapping("/edit/{email}")
+	public String updateUser(@PathVariable String email, Model model) {
+		Contact contact = contactService.findByEmail(email);
+		model.addAttribute("contact", contact);
+		return "fragments/editContact";
+	}
+
+	@PostMapping("/update")
+	public String updateUser(Contact contact, RedirectAttributes redirectAttributes) {
+		contactService.updateContact(contact);
+		redirectAttributes.addFlashAttribute("successMessage", "Contact updated successfully!");
+		return "redirect:/";
 	}
 }

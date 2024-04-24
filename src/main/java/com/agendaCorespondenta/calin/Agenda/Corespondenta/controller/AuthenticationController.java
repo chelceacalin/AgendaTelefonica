@@ -29,13 +29,9 @@ public class AuthenticationController {
 			model.addAttribute("error", error);
 			return login(model);
 		}
-
 		UserEntity user = userService.getCurrentUser();
-
-		System.out.println(user);
 		List<Contact> contactList = contactService.findAllyUserId(user.getId());
 		model.addAttribute("contacts", contactList);
-		System.out.println(contactList);
 		model.addAttribute("user", user);
 		return "index";
 	}
