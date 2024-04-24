@@ -30,6 +30,10 @@ public class ContactService {
 		return contactRepository.findByEmail(email);
 	}
 
+	public void deleteByEmail(String email) {
+		contactRepository.deleteByEmail(email);
+	}
+
 	public Boolean existsByEmail(String email) {
 		return contactRepository.existsByEmail(email);
 	}

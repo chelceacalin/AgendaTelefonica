@@ -26,15 +26,12 @@ public class ContactController {
 
 	@PostMapping("/add")
 	public String addContact(@ModelAttribute Contact contact, String userEmail, Model model, RedirectAttributes redirectAttributes) {
-
-		System.out.println(contact);
-		System.out.println(userEmail);
 		UserEntity currentUser = userService.findByEmail(userEmail);
 
 		if (contactService.existsByEmail(contact.getEmail())) {
-			model.addAttribute("hasFormError", true);
-			model.addAttribute("addFormError", "Contact with that email already exists!");
-			return "redirect:/invalidAddForm";
+			redirectAttributes.addFlashAttribute("addFormError", "Contact with that email already exists!");
+			redirectAttributes.addFlashAttribute("user", currentUser);
+			return "redirect:/contact/invalidAddForm";
 		}
 
 		contactService.saveContact(contact, currentUser);
@@ -61,6 +58,17 @@ public class ContactController {
 	public String updateUser(Contact contact, RedirectAttributes redirectAttributes) {
 		contactService.updateContact(contact);
 		redirectAttributes.addFlashAttribute("successMessage", "Contact updated successfully!");
+		return "redirect:/";
+	}
+
+
+	@PostMapping("/delete/{email}")
+	public String deleteUser(@PathVariable(name = "email") String email, RedirectAttributes redirectAttributes) {
+		Contact contact = contactService.findByEmail(email);
+		if (contact != null) {
+			contactService.deleteByEmail(email);
+		}
+		redirectAttributes.addFlashAttribute("successMessage", "User with email " + email + " deleted successfully!");
 		return "redirect:/";
 	}
 }

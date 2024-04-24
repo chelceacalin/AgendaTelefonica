@@ -30,14 +30,6 @@ public class UserService {
 		}
 	}
 
-	public UserEntity saveUser(UserEntity userEntity) {
-		return userRepository.save(userEntity);
-	}
-
-	public Boolean existsByEmail(String email) {
-		return userRepository.existsByEmail(email);
-	}
-
 	public UserEntity createUserIfNotExists(UserEntity userEntity) {
 		Optional<UserEntity> userEntityOptional = userRepository.findByEmail(userEntity.getEmail());
 		if (userEntityOptional.isPresent()) {
@@ -48,8 +40,6 @@ public class UserService {
 			return userEntity;
 		}
 	}
-
-
 
 	public void getUserCredentials(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -91,9 +81,7 @@ public class UserService {
 					.setName(name)
 					.setEmail(email)
 					.setAvatar_url(avatarUrl);
-
-			UserEntity newU = createUserIfNotExists(user);
-			return newU;
+			return createUserIfNotExists(user);
 		}
 		return null;
 	}
