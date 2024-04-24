@@ -40,12 +40,15 @@ public class UserService {
 
 	public UserEntity createUserIfNotExists(UserEntity userEntity) {
 		Optional<UserEntity> userEntityOptional = userRepository.findByEmail(userEntity.getEmail());
-		if (userEntityOptional.isEmpty()) {
+		if (userEntityOptional.isPresent()) {
+			return userEntityOptional.get();
+		} else {
+			userEntity.setId(UUID.randomUUID());
 			userRepository.save(userEntity);
 			return userEntity;
 		}
-		return userEntity;
 	}
+
 
 
 	public void getUserCredentials(Model model) {
@@ -81,18 +84,16 @@ public class UserService {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		if (authentication != null && authentication.getPrincipal() instanceof OAuth2User oauth2User) {
-			String name = oauth2User.getAttribute("name");
 			String email = oauth2User.getAttribute("email");
 			String avatarUrl = oauth2User.getAttribute("picture");
-
+			String name = oauth2User.getAttribute("name");
 			UserEntity user = new UserEntity()
-					.setId(UUID.randomUUID())
 					.setName(name)
 					.setEmail(email)
 					.setAvatar_url(avatarUrl);
 
-			createUserIfNotExists(user);
-			return user;
+			UserEntity newU = createUserIfNotExists(user);
+			return newU;
 		}
 		return null;
 	}

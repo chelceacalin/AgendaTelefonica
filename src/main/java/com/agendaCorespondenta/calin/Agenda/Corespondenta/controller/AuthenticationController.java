@@ -1,6 +1,8 @@
 package com.agendaCorespondenta.calin.Agenda.Corespondenta.controller;
 
+import com.agendaCorespondenta.calin.Agenda.Corespondenta.model.Contact;
 import com.agendaCorespondenta.calin.Agenda.Corespondenta.model.UserEntity;
+import com.agendaCorespondenta.calin.Agenda.Corespondenta.service.ContactService;
 import com.agendaCorespondenta.calin.Agenda.Corespondenta.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -9,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class AuthenticationController {
 
 	final UserService userService;
+	final ContactService contactService;
 
 	@GetMapping("/")
 	public String index(Model model) {
@@ -26,6 +31,11 @@ public class AuthenticationController {
 		}
 
 		UserEntity user = userService.getCurrentUser();
+
+		System.out.println(user);
+		List<Contact> contactList = contactService.findAllyUserId(user.getId());
+		model.addAttribute("contacts", contactList);
+		System.out.println(contactList);
 		model.addAttribute("user", user);
 		return "index";
 	}

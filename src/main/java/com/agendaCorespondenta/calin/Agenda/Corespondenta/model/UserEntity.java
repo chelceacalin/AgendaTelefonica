@@ -2,10 +2,7 @@ package com.agendaCorespondenta.calin.Agenda.Corespondenta.model;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,5 +26,6 @@ public class UserEntity {
 	String avatar_url;
 
 	@OneToMany(mappedBy = "user")
+	@ToString.Exclude
 	List<Contact> contacts;
 }

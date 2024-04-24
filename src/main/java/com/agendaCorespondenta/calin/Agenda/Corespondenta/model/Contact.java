@@ -2,10 +2,7 @@ package com.agendaCorespondenta.calin.Agenda.Corespondenta.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
@@ -29,6 +26,5 @@ public class Contact {
 
 	@ManyToOne
 	@JoinColumn(name = "userId", referencedColumnName = "id")
-	@JsonIgnore
 	UserEntity user;
 }
