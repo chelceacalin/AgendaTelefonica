@@ -44,7 +44,9 @@ public class SecurityConfig {
 						"/img/**",
 						"/error",
 						"/api/data/**",
-						"/actuator/**");
+						"/actuator/**",
+						"/contact/**"
+				);
 	}
 
 }
