@@ -5,14 +5,20 @@
     <div class="mt-4">
         <form method="get" action="/contact/edit/{{email}}" class="inline">
             <input type="hidden" name="email" value="{{email}}" />
-            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 me-4 rounded">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 me-2 rounded">
                 Edit
             </button>
         </form>
         <form method="post" action="/contact/delete/{{email}}" class="inline">
             <input type="hidden" name="email" value="{{email}}" />
-            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 me-2 rounded">
                 Delete
+            </button>
+        </form>
+        <form method="get" action="/contact/sendMail/{{email}}" class="inline">
+            <input type="hidden" name="email" value="{{email}}" />
+            <button type="submit" class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">
+                Send Email
             </button>
         </form>
     </div>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Mail</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .title {
+            margin-left: 35%;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+<div class="w-full max-w-sm">
+    <div class="title">Send Mail</div>
+
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post" action="/contact/sendMail">
+        {{#error}}
+            <div class="text-red-500 font-bold m-auto mb-4">{{error}}</div>
+        {{/error}}
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">
+                User's Email
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="email" type="text" placeholder="email@yahoo.com" name="email" value="{{email}}" required readonly>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">
+                Subject
+            </label>
+            <textarea
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="subject" placeholder="Subject" name="subject" required></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">
+                Body
+            </label>
+            <textarea
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="body" placeholder="body" name="body" required></textarea>
+        </div>
+        <div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+                    type="submit">
+                Send Mail
+            </button>
+
+            <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+               type="submit" href="/">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

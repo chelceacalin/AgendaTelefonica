@@ -27,8 +27,26 @@ spring:
             client-id: ${GOOGLE_CLIENT_ID}
             client-secret: ${GOOGLE_CLIENT_SECRET}
 
+
+  # Mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_APP_EMAIL}
+    password: ${MAIL_APP_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          debug: false
+    test-connection: false
+
 logging:
   level:
     org:
       springframework:
         security:  info
+
+

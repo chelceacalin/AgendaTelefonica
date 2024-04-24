@@ -49,6 +49,5 @@ public class ContactService {
 			contact.setNickName(updatedContact.getNickName());
 			contactRepository.save(contact);
 		}
-
 	}
 }

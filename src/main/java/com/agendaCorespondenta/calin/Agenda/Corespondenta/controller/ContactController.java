@@ -3,8 +3,10 @@ package com.agendaCorespondenta.calin.Agenda.Corespondenta.controller;
 import com.agendaCorespondenta.calin.Agenda.Corespondenta.model.Contact;
 import com.agendaCorespondenta.calin.Agenda.Corespondenta.model.UserEntity;
 import com.agendaCorespondenta.calin.Agenda.Corespondenta.service.ContactService;
+import com.agendaCorespondenta.calin.Agenda.Corespondenta.service.EmailSenderService;
 import com.agendaCorespondenta.calin.Agenda.Corespondenta.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +14,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/contact")
+@Slf4j
 @RequiredArgsConstructor
 public class ContactController {
 	final UserService userService;
 	final ContactService contactService;
+	final EmailSenderService emailSenderService;
 
 	@GetMapping("/add")
 	public String addContact(Model model, @ModelAttribute("user") UserEntity user) {
@@ -70,5 +74,31 @@ public class ContactController {
 		}
 		redirectAttributes.addFlashAttribute("successMessage", "User with email " + email + " deleted successfully!");
 		return "redirect:/";
+	}
+
+
+	@GetMapping("/sendMail/{email}")
+	public String sendMail(@PathVariable String email, Model model) {
+		model.addAttribute("email", email);
+		return "fragments/sendMail";
+	}
+
+	@PostMapping("/sendMail")
+	public String sendMail(MailTemplate mailTemplate, RedirectAttributes redirectAttributes) {
+		System.out.println(mailTemplate);
+		try {
+			emailSenderService.sendEmail(mailTemplate.email(), mailTemplate.subject(), mailTemplate.body());
+			redirectAttributes.addFlashAttribute("successMessage", "Email sent successfully!");
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			redirectAttributes.addFlashAttribute("error", "There has been an error sending the email, try again later");
+			return "redirect:/contact/sendMail/" + mailTemplate.email();
+		}
+
+		return "redirect:/";
+	}
+
+	public record MailTemplate(String email, String subject, String body) {
+
 	}
 }
