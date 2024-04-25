@@ -86,4 +86,11 @@ public class UserService {
 		return null;
 	}
 
+	public void updateUser(UserEntity updatedUser) {
+		UserEntity user = findByEmail(updatedUser.getEmail());
+		if (user != null) {
+			user.setName(updatedUser.getName());
+			userRepository.save(user);
+		}
+	}
 }

@@ -51,7 +51,8 @@ public class SecurityConfig {
 						"/error",
 						"/api/data/**",
 						"/actuator/**",
-						"/contact/**"
+						"/contact/**",
+						"/user/**"
 				);
 	}
 
