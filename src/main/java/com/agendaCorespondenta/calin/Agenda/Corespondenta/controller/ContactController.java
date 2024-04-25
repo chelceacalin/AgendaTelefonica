@@ -92,7 +92,6 @@ public class ContactController {
 
 		try {
 			UserEntity user = userService.findByEmail(mailTemplate.fromEmail());
-
 			emailSenderService.sendEmail(mailTemplate, user);
 			redirectAttributes.addFlashAttribute("successMessage", "Email sent successfully!");
 		} catch (Exception e) {
