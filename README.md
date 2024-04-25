@@ -57,7 +57,16 @@ it reduces dependency on external email clients like Gmail.
 ## 6. Screenshots App
 
 [TODO: Add screenshots of the application]
+![image](https://github.com/chelceacalin/CorrespondenceAgenda/assets/76866499/2a570d13-4d64-434b-9850-a9dc064b09d9)
+![image](https://github.com/chelceacalin/CorrespondenceAgenda/assets/76866499/7f7bd9ed-37eb-4e70-b4d3-a9ad4d03c1bb)
+![image](https://github.com/chelceacalin/CorrespondenceAgenda/assets/76866499/db24f450-7026-4997-afcf-0b0125e5f914)
+![image](https://github.com/chelceacalin/CorrespondenceAgenda/assets/76866499/58ef75a4-5a0a-4858-89c9-8881ed63dbf7)
+![image](https://github.com/chelceacalin/CorrespondenceAgenda/assets/76866499/c38b5b2e-140a-4e39-a552-103cddf5b904)
+![image](https://github.com/chelceacalin/CorrespondenceAgenda/assets/76866499/efb4510a-a55b-40d4-b8d2-d3a22cb143a4)
+
 
 ## 7. References
-
-[TODO: Add references]
+https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/mvc.html
+https://www.javatpoint.com/spring-mvc-tutorial
+https://mustache.github.io/
+https://oauth.net/2/
