@@ -32,7 +32,7 @@ public class ContactController {
 	public String addContact(@ModelAttribute Contact contact, String userEmail, Model model, RedirectAttributes redirectAttributes) {
 		UserEntity currentUser = userService.findByEmail(userEmail);
 
-		if (contactService.existsByEmail(contact.getEmail())) {
+		if (contactService.countByEmailAndUserId(contact.getEmail(), currentUser.getId()) > 0) {
 			redirectAttributes.addFlashAttribute("addFormError", "Contact with that email already exists!");
 			redirectAttributes.addFlashAttribute("user", currentUser);
 			return "redirect:/contact/invalidAddForm";
@@ -47,7 +47,7 @@ public class ContactController {
 	}
 
 	@GetMapping("/invalidAddForm")
-	public String invalidAddForm(Model model) {
+	public String invalidAddForm() {
 		return "fragments/addNewContactForm";
 	}
 
@@ -76,29 +76,36 @@ public class ContactController {
 		return "redirect:/";
 	}
 
-
 	@GetMapping("/sendMail/{email}")
-	public String sendMail(@PathVariable String email, Model model) {
+	public String sendMail(@PathVariable String email, ModelData modelData, Model model) {
+		model.addAttribute("fromEmail", modelData.fromEmail());
 		model.addAttribute("email", email);
 		return "fragments/sendMail";
+	}
+
+	public record ModelData(String fromEmail, String toEmail) {
 	}
 
 	@PostMapping("/sendMail")
 	public String sendMail(MailTemplate mailTemplate, RedirectAttributes redirectAttributes) {
 		System.out.println(mailTemplate);
+
 		try {
-			emailSenderService.sendEmail(mailTemplate.email(), mailTemplate.subject(), mailTemplate.body());
+			UserEntity user = userService.findByEmail(mailTemplate.fromEmail());
+
+			emailSenderService.sendEmail(mailTemplate, user);
 			redirectAttributes.addFlashAttribute("successMessage", "Email sent successfully!");
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			redirectAttributes.addFlashAttribute("error", "There has been an error sending the email, try again later");
-			return "redirect:/contact/sendMail/" + mailTemplate.email();
+			redirectAttributes.addAttribute("fromEmail", mailTemplate.fromEmail());
+			return "redirect:/contact/sendMail/" + mailTemplate.toEmail();
 		}
 
 		return "redirect:/";
 	}
 
-	public record MailTemplate(String email, String subject, String body) {
+	public record MailTemplate(String fromEmail, String toEmail, String subject, String body) {
 
 	}
 }

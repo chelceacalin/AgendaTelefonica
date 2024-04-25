@@ -19,7 +19,7 @@ public class ContactService {
 	final ContactRepository contactRepository;
 
 	public void saveContact(Contact contact, UserEntity user) {
-		if (!contactRepository.existsByEmail(contact.getEmail())) {
+		if (contactRepository.countByEmailAndUserId(contact.getEmail(), user.getId()) == 0) {
 			contact.setId(UUID.randomUUID());
 			contact.setUser(user);
 			contactRepository.save(contact);
@@ -34,8 +34,8 @@ public class ContactService {
 		contactRepository.deleteByEmail(email);
 	}
 
-	public Boolean existsByEmail(String email) {
-		return contactRepository.existsByEmail(email);
+	public long countByEmailAndUserId(String email, UUID userId) {
+		return contactRepository.countByEmailAndUserId(email, userId);
 	}
 
 	public List<Contact> findAllyUserId(UUID userId) {

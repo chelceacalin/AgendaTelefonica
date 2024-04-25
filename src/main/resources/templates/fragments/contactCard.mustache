@@ -16,10 +16,18 @@
             </button>
         </form>
         <form method="get" action="/contact/sendMail/{{email}}" class="inline">
-            <input type="hidden" name="email" value="{{email}}" />
+            <input type="hidden" name="fromEmail" value="{{user.email}}"/>
+            <input type="hidden" name="toEmail" value="{{email}}" />
+{{#hasEmailPassword}}
             <button type="submit" class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">
                 Send Email
             </button>
+{{/hasEmailPassword}}
+
+            {{^hasEmailPassword}}
+                <span class="text-red-500 font-bold">No SMPT password set!</span>
+            {{/hasEmailPassword}}
+
         </form>
     </div>
 </div>

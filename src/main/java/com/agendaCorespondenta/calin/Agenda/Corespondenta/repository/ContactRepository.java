@@ -11,7 +11,8 @@ import java.util.UUID;
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, UUID> {
 
-	Boolean existsByEmail(String email);
+	@Query("select count(c) from Contact c where c.email=?1 and c.user.id=?2")
+	long countByEmailAndUserId(String email, UUID userId);
 
 	@Query("select c from Contact c where c.user.id=?1 order by c.email")
 	List<Contact> findAllByUserId(UUID userId);

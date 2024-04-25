@@ -28,4 +28,6 @@ public class UserEntity {
 	@OneToMany(mappedBy = "user")
 	@ToString.Exclude
 	List<Contact> contacts;
+
+	String smtpEmailPassword;
 }

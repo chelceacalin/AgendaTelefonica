@@ -23,16 +23,15 @@ public class AuthenticationController {
 	@GetMapping("/")
 	public String index(Model model) {
 		userService.getUserCredentials(model);
-		String error = "";
 		if (!model.containsAttribute("email") || model.getAttribute("email") == null) {
-			error = "Make sure that your github account has a public email!";
-			model.addAttribute("error", error);
+			model.addAttribute("error", "Make sure that your github account has a public email!");
 			return login(model);
 		}
 		UserEntity user = userService.getCurrentUser();
 		List<Contact> contactList = contactService.findAllyUserId(user.getId());
 		model.addAttribute("contacts", contactList);
 		model.addAttribute("user", user);
+		model.addAttribute("hasEmailPassword", user.getSmtpEmailPassword() != null && user.getSmtpEmailPassword().length() > 3);
 		return "index";
 	}
 

@@ -35,7 +35,12 @@ public class UserService {
 		if (userEntityOptional.isPresent()) {
 			return userEntityOptional.get();
 		} else {
+			if (userEntity.getEmail() == null || userEntity.getEmail().isEmpty()) {
+				throw new RuntimeException("User must have a valid email!");
+			}
+
 			userEntity.setId(UUID.randomUUID());
+			userEntity.setSmtpEmailPassword("");
 			userRepository.save(userEntity);
 			return userEntity;
 		}
@@ -90,6 +95,7 @@ public class UserService {
 		UserEntity user = findByEmail(updatedUser.getEmail());
 		if (user != null) {
 			user.setName(updatedUser.getName());
+			user.setSmtpEmailPassword(updatedUser.getSmtpEmailPassword());
 			userRepository.save(user);
 		}
 	}
