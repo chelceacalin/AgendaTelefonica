@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .title {
+            margin-left: 35%;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+<div class="w-full max-w-sm">
+    <div class="title">My Profile</div>
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-8" method="post" action="/user/updateProfile">
+        <div class="flex justify-center items-center">
+            <img src="{{user.avatar_url}}" alt="Profile Picture" class="rounded-full mx-auto" referrerpolicy="no-referrer">
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">
+                Email *
+            </label>
+            <input class="shadow appearance-none border rounded bg-gray-100 text-gray-600 w-full py-2 px-3 leading-tight
+             focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="email@gmail.com"
+                   value="{{user.email}}" readonly
+                   name="email">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">
+                Full Name *
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="full-name" type="text" placeholder="Calin Chelcea" name="name" value="{{user.name}}" required>
+        </div>
+
+        <div class="mb-2 mt-8">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">
+               Email Properties:
+            </label>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">
+                SMTP Email Password
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="full-name" type="password" placeholder="( Optional )" name="smtpEmailPassword" value="{{user.smtpEmailPassword}}" >
+        </div>
+
+        <div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+                    type="submit">
+                Save
+            </button>
+
+            <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+               type="submit" href="/">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

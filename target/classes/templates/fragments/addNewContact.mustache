@@ -1,0 +1,22 @@
+<form id="contactForm" action="/contact/add" method="get" style="display: none;">
+    <input type="hidden" id="email" name="email" value="{{user.email}}" />
+</form>
+
+
+<a href="#" onclick="submitForm()">
+    <div class="bg-gray-200 border-dashed border-2 border-gray-400 rounded-lg p-12 flex flex-col justify-center items-center transition duration-300 ease-in-out hover:bg-gray-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-600 mb-4" viewBox="0 0 20 20"
+             fill="currentColor">
+            <path fill-rule="evenodd"
+                  d="M10 2a8 8 0 0 1 8 8c0 2.1-.8 4-2.1 5.5L18 18l-1.5-1.5A7.96 7.96 0 0 1 10 18a8 8 0 0 1-8-8 8 8 0 0 1 8-8zm1 11a6 6 0 1 0-2-11.77V3a1 1 0 0 0-2 0v1.23A6 6 0 0 0 4 13a6.02 6.02 0 0 0 5 5.92V19h2v-1.08A6.02 6.02 0 0 0 11 13z"
+                  clip-rule="evenodd"/>
+        </svg>
+        <p class="text-gray-600">Add New Contact</p>
+    </div>
+</a>
+
+<script>
+    function submitForm() {
+        document.getElementById("contactForm").submit();
+    }
+</script>

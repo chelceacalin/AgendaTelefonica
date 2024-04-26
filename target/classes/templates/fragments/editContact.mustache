@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Contact</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .title {
+            margin-left: 35%;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+<div class="w-full max-w-sm">
+    <div class="title">Edit Contact</div>
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="post" action="/contact/update">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">
+                Email *
+            </label>
+            <input class="shadow appearance-none border rounded bg-gray-100 text-gray-600 w-full py-2 px-3 leading-tight
+             focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="email@gmail.com" required
+                   value="{{contact.email}}" readonly
+                   name="email">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">
+                Full Name *
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="full-name" type="text" placeholder="Calin Chelcea" name="name" value="{{contact.name}}" required>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="full-name">
+                Nickname ( Alias )
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="nickName" type="text" placeholder="Duracel" name="nickName" value="{{contact.nickName}}">
+        </div>
+
+        <div>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+                    type="submit">
+               Save
+            </button>
+
+            <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
+               type="submit" href="/">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: Agenda-Telefonica
+
+  #Logs
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  # Database
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/calin}
+    username: ${DB_USERNAME:calin}
+    password: ${DB_PASSWPORD:calin}
+    driver-class-name: org.postgresql.Driver
+
+
+  # Github Login
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+          # Google Login
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+
+
+  # Mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    test-connection: false
+
+logging:
+  level:
+    org:
+      springframework:
+        security:  info
+
+
