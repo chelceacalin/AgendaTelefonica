@@ -10,6 +10,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,14 +22,23 @@ public class AuthenticationController {
 	final ContactService contactService;
 
 	@GetMapping("/")
-	public String index(Model model) {
+	public String index(Model model, @RequestParam(required = false) String query) {
 		userService.getUserCredentials(model);
 		if (!model.containsAttribute("email") || model.getAttribute("email") == null) {
 			model.addAttribute("error", "Make sure that your github account has a public email!");
 			return login(model);
 		}
 		UserEntity user = userService.getCurrentUser();
-		List<Contact> contactList = contactService.findAllyUserId(user.getId());
+
+		List<Contact> contactList;
+
+		if (query != null && !query.isEmpty()) {
+			contactList = contactService.findAllByUserIdAndNameOrNickName(user.getId(), query);
+		} else {
+			contactList = contactService.findAllyUserId(user.getId());
+		}
+
+		contactList.forEach(System.out::println);
 		model.addAttribute("contacts", contactList);
 		model.addAttribute("user", user);
 		model.addAttribute("hasEmailPassword", user.getSmtpEmailPassword() != null && user.getSmtpEmailPassword().length() > 3);

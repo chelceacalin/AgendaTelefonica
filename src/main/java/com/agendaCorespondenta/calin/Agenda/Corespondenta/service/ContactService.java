@@ -6,6 +6,7 @@ import com.agendaCorespondenta.calin.Agenda.Corespondenta.model.UserEntity;
 import com.agendaCorespondenta.calin.Agenda.Corespondenta.repository.ContactRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +37,10 @@ public class ContactService {
 
 	public long countByEmailAndUserId(String email, UUID userId) {
 		return contactRepository.countByEmailAndUserId(email, userId);
+	}
+
+	public List<Contact> findAllByUserIdAndNameOrNickName(UUID userId,String query) {
+		return contactRepository.findAllByUserIdAndNameOrNickName(userId, query);
 	}
 
 	public List<Contact> findAllyUserId(UUID userId) {
