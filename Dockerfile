@@ -1,16 +1,6 @@
-FROM ubuntu:latest AS build
+FROM openjdk:17-jdk-alpine
 
-RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk maven
+WORKDIR /app
+COPY target/Agenda-Corespondenta-0.0.1-SNAPSHOT.jar /app/
 
-COPY . /workspace
-WORKDIR /workspace
-
-RUN mvn clean package -DskipTests
-
-FROM openjdk:17-jdk-slim
-EXPOSE 8080
-
-COPY --from=build target/agenda-corespondenta-0.0.1-SNAPSHOT.jar /app/app.jar
-
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+CMD ["java", "-jar", "getting-started-with-springboot-and-docker-0.0.1-SNAPSHOT.jar"]
