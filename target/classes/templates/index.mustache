@@ -6,10 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda Corespondenta</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <style>
-        .bg-gray-200:hover {
-            background-color: #CBD5E0; /* Change background color on hover */
+        #toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            display: none;
+            z-index: 999;
+        }
+
+        #toast.show {
+            display: block;
+        }
+
+        #toast #img {
+            float: left;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 640px) {
+            #toast {
+                width: 90%;
+                left: 5%;
+            }
         }
     </style>
 </head>
@@ -32,18 +56,17 @@
 {{/isNewContact}}
 
 <div class="container mx-auto py-8">
-    <h1 class="text-3xl font-bold mb-6">Agenda Corespondenta</h1>
+    <h1 class="text-3xl font-bold mb-6 m-4">Agenda Corespondenta</h1>
 
     {{#successMessage}}
         {{>fragments/successMessage}}
     {{/successMessage}}
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {{>fragments/addNewContact}}
         {{#contacts}}
             {{>fragments/contactCard}}
         {{/contacts}}
-        {{>fragments/addNewContact}}
-
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>

@@ -26,15 +26,17 @@
         </div>
 
         {{#githubLogin}}
-            <span class="mr-2">{{user.name}}</span>
-            <img src="{{user.avatar_url}}" alt="Avatar" class="w-8 h-8 rounded-full" referrerpolicy="no-referrer">
+            <div class="flex items-center">
+                <span class="mr-2">{{user.name}}</span>
+                <img src="{{user.avatar_url}}" alt="Avatar" class="w-8 h-8 rounded-full" referrerpolicy="no-referrer">
+            </div>
         {{/githubLogin}}
 
         {{#googleLogin}}
-            <span class="mr-2">{{user.name}}</span>
-            <img src="{{user.avatar_url}}" alt="Avatar" class="w-8 h-8 rounded-full ms-1 mr-4" referrerpolicy="no-referrer">
+            <div class="flex items-center">
+                <span class="mr-2">{{user.name}}</span>
+                <img src="{{user.avatar_url}}" alt="Avatar" class="w-8 h-8 rounded-full ms-1 mr-4" referrerpolicy="no-referrer">
+            </div>
         {{/googleLogin}}
-
-
     </div>
 </nav>
