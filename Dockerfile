@@ -3,14 +3,15 @@ FROM ubuntu:latest AS build
 RUN apt-get update && \
     apt-get install -y openjdk-17-jdk maven
 
-COPY . /workspace
-WORKDIR /workspace
+WORKDIR /app
 
+COPY . .
 RUN mvn clean package -DskipTests
 
-FROM openjdk:17-jdk-slim
-EXPOSE 8080
+RUN ls target
 
-COPY --from=build target/agenda-corespondenta-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY target/*.jar /app/app.jar
+
+EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
