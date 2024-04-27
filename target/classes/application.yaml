@@ -10,9 +10,9 @@ spring:
 
   # Database
   datasource:
-    url:  ${DB_URL:jdbc:postgresql://localhost:5432/calin}
-    username: ${DB_USERNAME:calin}
-    password: ${DB_PASSWORD:calin}
+    url:  ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
 
