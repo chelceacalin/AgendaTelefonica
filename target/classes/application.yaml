@@ -10,9 +10,9 @@ spring:
 
   # Database
   datasource:
-    url: jdbc:postgresql://localhost:5432/calin
-    username: calin
-    password: calin
+    url:  ${GCP_URL:jdbc:postgresql://localhost:5432/calin}
+    username: ${GCP_USERNAME:calin}
+    password: ${GCP_PASS:calin}
     driver-class-name: org.postgresql.Driver
 
 
