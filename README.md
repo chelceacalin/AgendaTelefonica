@@ -1,12 +1,17 @@
-# Correspondence Agenda
+# Title: Correspondence Agenda
+
+Nume: Chelcea Calin Marius
+Grupa: 1131
+Seria: C
+
 
 ## Video Presentation
 
-Link: [TODO](link_video)
+Link: https://youtu.be/m-saVr7-rNg
 
 ## Hosted Application
 
-Link: [TODO](link_hosted_app)
+Link: http://corespagenda.lm.r.appspot.com
 
 ## 1. Introduction
 
