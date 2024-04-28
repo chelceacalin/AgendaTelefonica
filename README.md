@@ -1,18 +1,5 @@
 # Title: Correspondence Agenda
 
-Nume: Chelcea Calin Marius
-Grupa: 1131
-Seria: C
-
-
-## Video Presentation
-
-Link: https://youtu.be/m-saVr7-rNg
-
-## Hosted Application
-
-Link: http://corespagenda.lm.r.appspot.com
-
 ## 1. Introduction
 
 Correspondence Agenda is a web application designed to streamline email management for users. With features to create, update, and delete contacts, it aims to simplify the process of organizing and communicating via email. By integrating an alternative SMTP password, users can send emails directly from the application, eliminating the need for separate email interfaces like Gmail.
